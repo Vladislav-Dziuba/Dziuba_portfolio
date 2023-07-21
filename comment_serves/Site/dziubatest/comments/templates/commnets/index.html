@@ -1,0 +1,56 @@
+{% extends 'commnets/base.html' %}
+<!--<h1>{{title}}</h1>-->
+
+
+
+{% block content %}
+<ul class="list_comments">
+    <h2>История отзывов:</h2>
+    {% for p in posts %}
+        <li>
+
+
+    <h2>{{p.title}}</h2>
+             <div class="article-panel">
+            <p class="first">Категория: {{p.cat}}</p>
+            <p class="last">Дата: {{p.time_create|date:"d-m-Y H:i:s"}}</p>
+        </div>
+        <div class="article-panel"></div>
+
+
+            {% if p.cat_id == 1 %}
+            <div  class="article-panel"><strong class="first"> Оценка пользователя: <font  color="#FF0000" face="serif">{{p.cat}}</font></strong></div>
+            {% else %}
+            <div  class="article-panel"><strong class="first"> Оценка пользователя: <font  color="#008000" face="serif">{{p.cat}}</font></strong></div>
+            {% endif %}
+            <hr></hr>
+
+
+        <div  class="article-panel">
+            <strong class="first"> Распознавание Logisticregression:</strong>
+            {% if p.pred == 'Отрицательный' %}
+			<strong class="first"> <font  color="#FF0000" face="serif">  {{p.pred}}  </font></strong>
+	{% else %}
+			<strong class="first"> <font  color="#008000" face="serif">  {{p.pred}}  </font></strong>
+	{% endif %}
+<!--            <p class="last"><b class="keywords">Распознавание NN LSTM:</b></p>-->
+
+        </div>
+            <h3>{{p.score}}</h3>
+
+
+    <p>{{p.content|linebreaks|truncatewords:50}}</p>
+        <div class ="clear"></div>
+        <p class ="link_read-post"><a href="{{ p.get_absolute_url }}">Читать полностью</a></p>
+    </li>
+
+    <hr></hr>
+
+
+    {% endfor %}
+
+
+
+</ul>
+
+{% endblock %}
